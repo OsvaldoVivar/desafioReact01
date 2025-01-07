@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
         <Navbar />
         <div className="flex-grow">
           {/* <Home /> */}
-          <Register />
+          {/* <Register /> */}
+          <Login />
         </div>
         <Footer />
       </div>
