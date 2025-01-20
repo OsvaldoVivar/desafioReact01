@@ -3,7 +3,7 @@ import React from "react";
 const Header = () => {
   return (
     <div
-      className="mt-14 relative bg-cover bg-center h-72"
+      className="mt-8 relative bg-cover bg-center h-72"
       style={{ backgroundImage: "url(public/Header.jpg)" }}
     >
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>

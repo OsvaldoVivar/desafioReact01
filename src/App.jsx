@@ -1,8 +1,8 @@
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+// import Register from "./pages/Register";
+// import Login from "./pages/Login";
 
 function App() {
   return (
@@ -10,9 +10,9 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="flex-grow">
-          {/* <Home /> */}
+          <Home />
           {/* <Register /> */}
-          <Login />
+          {/* <Login /> */}
         </div>
         <Footer />
       </div>

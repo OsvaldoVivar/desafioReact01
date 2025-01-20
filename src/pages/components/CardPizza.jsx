@@ -1,23 +1,23 @@
 import React from "react";
-import { formatCurr } from "../../utils/formatCurr";
+import { formatCurr } from "../../utils/formatCurr.js";
 
-const CardPizza = ({ img, name, price, ingredients }) => {
+const CardPizza = ({ pizza }) => {
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <a href="#">
-        <img className="rounded-t-lg" src={img} alt="" />
+        <img className="rounded-t-lg" src={pizza.img} alt="" />
       </a>
       <div className="p-5">
         <a href="#">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {name}
+            {pizza.name}
           </h5>
         </a>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          {ingredients}
+          {pizza.ingredients.map((ingredient) => ingredient).join(", ")}
         </p>
         <p className="mb-3 font-bold text-center text-gray-700 dark:text-gray-400">
-          Precio:$ {formatCurr(price)}
+          Precio:$ {formatCurr(pizza.price)}
         </p>
         <div className="justify-between flex">
           <a
