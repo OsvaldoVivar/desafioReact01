@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import CardPizza from "./components/CardPizza";
-import { pizzas } from "../data/pizzas.js";
+//import { pizzas } from "../data/pizzas.js";
 
 const Home = () => {
+  const [pizzas, setPizzas] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5001/api/pizzas")
+      .then((res) => res.json())
+      .then((data) => {
+        setPizzas(data);
+        console.log(data);
+      });
+  }, []);
   console.log(pizzas);
   return (
     <div>
