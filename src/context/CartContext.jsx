@@ -107,6 +107,8 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(pizzaCart);
+  const [token, setToken] = useState(false);
+  //const token = true;
 
   // Agregar una pizza al carrito
   const addToCart = (pizza) => {
@@ -153,7 +155,15 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, increaseCount, decreaseCount, calculateTotal }}
+      value={{
+        cart,
+        addToCart,
+        increaseCount,
+        decreaseCount,
+        calculateTotal,
+        token,
+        setToken,
+      }}
     >
       {children}
     </CartContext.Provider>

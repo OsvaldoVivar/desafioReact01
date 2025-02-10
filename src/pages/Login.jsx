@@ -1,23 +1,33 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [clave, setClave] = useState("");
+  const navigate = useNavigate();
+  const { token, setToken } = useCart();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (email === "" || clave === "") {
-      alert("Todos los campos son obligatorios");
+
+    if (email === "hola" && clave === "holahola") {
+      alert("Inicio con éxito, bienvenido a tu perfil.");
+      setToken(true); // Cambia el token correctamente
+      navigate("/profile");
     } else if (clave.length < 6) {
-      alert("La contraseña debe tener al menos 6 caracteres");
+      alert("La contraseña debe tener al menos 6 caracteres.");
+      setToken(false); // Cambia el token correctamente
+      navigate("/login");
     } else {
-      alert("Iniciando Éxito");
+      alert("Usuario o contraseña incorrectos.");
     }
   };
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h1>SOY LOGIN</h1>
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
           Inicia sesión en Pizzería Mamma Mia!
         </h2>

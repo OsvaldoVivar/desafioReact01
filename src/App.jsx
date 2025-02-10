@@ -8,9 +8,10 @@ import Pizza from "./pages/components/Pizza";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
-import { CartProvider } from "./context/CartContext";
+import { useCart } from "./context/CartContext";
 
 function App() {
+  const { token } = useCart();
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -20,8 +21,11 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
-          <Route path="/pizza/p001" element={<Pizza />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/pizza/:id" element={<Pizza />}></Route>
+          <Route
+            path="/profile"
+            element={token ? <Profile></Profile> : <Login></Login>}
+          ></Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

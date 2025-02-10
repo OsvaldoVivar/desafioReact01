@@ -2,7 +2,14 @@ import React from "react";
 import { useCart } from "../context/CartContext";
 
 const Cart = () => {
-  const { cart, increaseCount, decreaseCount, calculateTotal } = useCart();
+  const {
+    cart,
+    increaseCount,
+    decreaseCount,
+    calculateTotal,
+    setToken,
+    token,
+  } = useCart();
 
   return (
     <div>
@@ -49,7 +56,14 @@ const Cart = () => {
 
       <div className="flex justify-between items-center mt-8">
         <p className="text-lg font-bold">Total: $ {calculateTotal()}</p>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded hover:scale-105 transition-transform duration-300">
+        <button
+          className={`font-bold py-2 px-4 rounded transition-transform duration-300 ${
+            token
+              ? "bg-blue-500 hover:bg-blue-700 text-white hover:scale-105"
+              : "bg-gray-400 cursor-not-allowed"
+          }`}
+          disabled={!token} // Deshabilitar el botón si token es false
+        >
           Pagar
         </button>
       </div>
