@@ -107,8 +107,78 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(pizzaCart);
-  const [token, setToken] = useState(false);
+  const [token, setToken] = useState(null);
+  const [email, setEmail] = useState("");
+  const [userData, setUserData] = useState();
+  console.log(token);
   //const token = true;
+
+  //metodo parfa registrar usuario//////////////////////////////////////////////////////////////
+  const register = async (email, password) => {
+    try {
+      const response = await fetch("http://localhost:5001/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response.ok) {
+        alert("Usuario registrado con éxito");
+      } else {
+        const error = await response.json();
+        alert("Error al registrar usuario");
+      }
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+    }
+  };
+  //metodo para logear usuario
+  const login = async (email, password) => {
+    try {
+      const response = await fetch("http://localhost:5001/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setToken(data.token);
+        setEmail(data.email);
+        alert("login excitoso");
+      } else {
+        const error = await response.json();
+        alert("Error al hacer login");
+      }
+    } catch (error) {
+      console.error("Error al hacer login:", error);
+    }
+  };
+  // metodo para extrae el token
+  const getProfile = async () => {
+    try {
+      const response = await fetch("http://localhost:5001/api/auth/me", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUserData(data);
+        setEmail(data.email);
+      } else {
+        const error = await response.json();
+        alert("error", error);
+      }
+    } catch (error) {
+      console.error("Error al hacer login:", error);
+    }
+  };
 
   // Agregar una pizza al carrito
   const addToCart = (pizza) => {
@@ -163,6 +233,11 @@ export const CartProvider = ({ children }) => {
         calculateTotal,
         token,
         setToken,
+        register,
+        login,
+        userData,
+        getProfile,
+        email,
       }}
     >
       {children}
