@@ -180,6 +180,35 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  /////////////////////
+  const handleCheckout = async () => {
+    if (!token) {
+      alert("Debes iniciar sesión para realizar la compra.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5001/api/checkouts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ cart }),
+      });
+
+      if (response.ok) {
+        alert("Compra realizada con éxito.");
+      } else {
+        const errorData = await response.json();
+        alert(`Error en la compra: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error("Error al procesar la compra:", error);
+      alert("Hubo un problema al procesar la compra. Inténtalo nuevamente.");
+    }
+  };
+
   // Agregar una pizza al carrito
   const addToCart = (pizza) => {
     setCart((prevCart) => {
@@ -238,6 +267,7 @@ export const CartProvider = ({ children }) => {
         userData,
         getProfile,
         email,
+        handleCheckout,
       }}
     >
       {children}

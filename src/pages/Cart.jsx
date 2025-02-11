@@ -7,8 +7,8 @@ const Cart = () => {
     increaseCount,
     decreaseCount,
     calculateTotal,
-    setToken,
     token,
+    handleCheckout,
   } = useCart();
 
   return (
@@ -16,7 +16,6 @@ const Cart = () => {
       <h1 className="text-3xl font-bold text-center mb-8">
         Carrito de Compras
       </h1>
-
       <div className="flex flex-col gap-4">
         {cart.map((item) => (
           <div
@@ -57,12 +56,13 @@ const Cart = () => {
       <div className="flex justify-between items-center mt-8">
         <p className="text-lg font-bold">Total: $ {calculateTotal()}</p>
         <button
+          onClick={handleCheckout}
           className={`font-bold py-2 px-4 rounded transition-transform duration-300 ${
             token
               ? "bg-blue-500 hover:bg-blue-700 text-white hover:scale-105"
               : "bg-gray-400 cursor-not-allowed"
           }`}
-          disabled={!token} // Deshabilitar el botón si token es false
+          disabled={!token}
         >
           Pagar
         </button>
